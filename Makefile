@@ -1,4 +1,5 @@
 PKG_NAME := mkfontscale
-URL := http://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.2.tar.gz
+URL = https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common
