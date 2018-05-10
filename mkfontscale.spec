@@ -6,7 +6,7 @@
 #
 Name     : mkfontscale
 Version  : 1.1.3
-Release  : 9
+Release  : 10
 URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz
 Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz
 Source99 : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz.sig
