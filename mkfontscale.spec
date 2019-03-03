@@ -5,16 +5,17 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : mkfontscale
-Version  : 1.1.3
-Release  : 10
-URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz
-Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz
-Source99 : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.1.3.tar.gz.sig
+Version  : 1.2.0
+Release  : 11
+URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.0.tar.gz
+Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.0.tar.gz
+Source99 : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.0.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
-Requires: mkfontscale-bin
-Requires: mkfontscale-doc
+Requires: mkfontscale-bin = %{version}-%{release}
+Requires: mkfontscale-license = %{version}-%{release}
+Requires: mkfontscale-man = %{version}-%{release}
 BuildRequires : pkgconfig(fontenc)
 BuildRequires : pkgconfig(freetype2)
 BuildRequires : pkgconfig(xorg-macros)
@@ -22,33 +23,43 @@ BuildRequires : pkgconfig(xproto)
 
 %description
 mkfontscale creates the fonts.scale and fonts.dir index files used by the
-legacy X11 font system.
+legacy X11 font system.  It now includes the mkfontdir script previously
+distributed separately for compatibility with older X11 versions.
 
 %package bin
 Summary: bin components for the mkfontscale package.
 Group: Binaries
+Requires: mkfontscale-license = %{version}-%{release}
 
 %description bin
 bin components for the mkfontscale package.
 
 
-%package doc
-Summary: doc components for the mkfontscale package.
-Group: Documentation
+%package license
+Summary: license components for the mkfontscale package.
+Group: Default
 
-%description doc
-doc components for the mkfontscale package.
+%description license
+license components for the mkfontscale package.
+
+
+%package man
+Summary: man components for the mkfontscale package.
+Group: Default
+
+%description man
+man components for the mkfontscale package.
 
 
 %prep
-%setup -q -n mkfontscale-1.1.3
+%setup -q -n mkfontscale-1.2.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1522112175
+export SOURCE_DATE_EPOCH=1551581866
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -60,8 +71,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1522112175
+export SOURCE_DATE_EPOCH=1551581866
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/mkfontscale
+cp COPYING %{buildroot}/usr/share/package-licenses/mkfontscale/COPYING
 %make_install
 
 %files
@@ -69,8 +82,14 @@ rm -rf %{buildroot}
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/mkfontdir
 /usr/bin/mkfontscale
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mkfontscale/COPYING
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/mkfontdir.1
+/usr/share/man/man1/mkfontscale.1
