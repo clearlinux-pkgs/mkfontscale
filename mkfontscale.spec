@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : mkfontscale
-Version  : 1.2.0
-Release  : 12
-URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.0.tar.gz
-Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.0.tar.gz
-Source99 : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.0.tar.gz.sig
+Version  : 1.2.1
+Release  : 13
+URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz
+Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz
+Source99 : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
@@ -52,14 +52,15 @@ man components for the mkfontscale package.
 
 
 %prep
-%setup -q -n mkfontscale-1.2.0
+%setup -q -n mkfontscale-1.2.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551582734
+export SOURCE_DATE_EPOCH=1553274382
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -71,7 +72,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1551582734
+export SOURCE_DATE_EPOCH=1553274382
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/mkfontscale
 cp COPYING %{buildroot}/usr/share/package-licenses/mkfontscale/COPYING
