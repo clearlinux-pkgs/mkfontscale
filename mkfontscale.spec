@@ -6,7 +6,7 @@
 #
 Name     : mkfontscale
 Version  : 1.2.1
-Release  : 13
+Release  : 14
 URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz
 Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz
 Source99 : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz.sig
@@ -59,8 +59,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1553274382
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1557095925
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -72,7 +78,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1553274382
+export SOURCE_DATE_EPOCH=1557095925
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/mkfontscale
 cp COPYING %{buildroot}/usr/share/package-licenses/mkfontscale/COPYING
