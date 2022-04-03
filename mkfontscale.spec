@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : mkfontscale
-Version  : 1.2.1
-Release  : 16
-URL      : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz
-Source0  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz
-Source1  : https://xorg.freedesktop.org/releases/individual/app/mkfontscale-1.2.1.tar.gz.sig
+Version  : 1.2.2
+Release  : 17
+URL      : https://www.x.org/releases/individual/app/mkfontscale-1.2.2.tar.gz
+Source0  : https://www.x.org/releases/individual/app/mkfontscale-1.2.2.tar.gz
+Source1  : https://www.x.org/releases/individual/app/mkfontscale-1.2.2.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
@@ -52,23 +52,23 @@ man components for the mkfontscale package.
 
 
 %prep
-%setup -q -n mkfontscale-1.2.1
-cd %{_builddir}/mkfontscale-1.2.1
+%setup -q -n mkfontscale-1.2.2
+cd %{_builddir}/mkfontscale-1.2.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604607067
+export SOURCE_DATE_EPOCH=1649019150
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -80,14 +80,14 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604607067
+export SOURCE_DATE_EPOCH=1649019150
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/mkfontscale
-cp %{_builddir}/mkfontscale-1.2.1/COPYING %{buildroot}/usr/share/package-licenses/mkfontscale/113de3dee0fa0a922b52ade0ee2dd98377de34b5
+cp %{_builddir}/mkfontscale-1.2.2/COPYING %{buildroot}/usr/share/package-licenses/mkfontscale/113de3dee0fa0a922b52ade0ee2dd98377de34b5
 %make_install
 ## Remove excluded files
-rm -f %{buildroot}/usr/share/man/man1/mkfontdir.1
-rm -f %{buildroot}/usr/bin/mkfontdir
+rm -f %{buildroot}*/usr/share/man/man1/mkfontdir.1
+rm -f %{buildroot}*/usr/bin/mkfontdir
 
 %files
 %defattr(-,root,root,-)
